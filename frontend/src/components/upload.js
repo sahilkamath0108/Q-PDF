@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import axios from 'axios';
 import { FiUpload } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,12 +24,12 @@ const Upload = () => {
       // You can perform further actions with the selected file
       console.log("Selected File:", selectedFile);
       // Example: Upload the file to a server
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-      // Call your API endpoint to handle file upload
-      axios.post('https://39f8-34-105-14-223.ngrok-free.app/uploadPdfs', formData)
-        .then(response => console.log(response))
-        .catch(error => console.error(error));
+      //   const formData = new FormData();
+      //   formData.append('file', selectedFile);
+      // // Call your API endpoint to handle file upload
+      // axios.post('https://39f8-34-105-14-223.ngrok-free.app/uploadPdfs', formData)
+      //   .then(response => console.log(response))
+      //   .catch(error => console.error(error));
     } else {
       alert("Please select a file before submitting.");
     }
@@ -54,10 +56,25 @@ const [question, setQuestion] = useState('');
           setAnswer('Error fetching answer. Please try again.');
         }
       };
+      const handleDelete = async () => {
+        try {
+          // const response = await axios.post('https://39f8-34-105-14-223.ngrok-free.app/ask', { selectedFile });
+          // response_data = response.data
+          // console.log(response.data)
+        
+          console.log("deleted")
+          setUploaded(false)
+          // setAnswer(response.data.response);
+        //   console.log(answer)
+        } catch (error) {
+          console.error('Error in deleting', error);
+          // setAnswer('Error fetching answer. Please try again.');
+        }
+      };
   return (
     <div>
 
-    {/* {!uploaded ? (<div className=" h-fit  ">
+    {!uploaded ? (<div className=" h-fit  ">
       <div className="flex flex-col items-center justify-center pt-40 gap-10">
         <div className="text-2xl">Upload your document here</div>
         <form onSubmit={handleFormSubmit}>
@@ -96,6 +113,11 @@ const [question, setQuestion] = useState('');
           <button onClick={handleAskQuestion} className="">
           <FiUpload size={30} />
           </button>
+          <button onClick={handleDelete}>
+          <RiDeleteBin6Line size={30} />
+          
+          
+        </button>
         </div>
 
         </div>
@@ -106,8 +128,10 @@ const [question, setQuestion] = useState('');
           </div>
         )}
       </div>
-    )} */}
-     <div className="h-fit ">
+    )}
+
+    {/* only questions */}
+     {/* <div className="h-fit ">
         <div className="flex flex-col  items-center justify-center pt-40 ">
           <label htmlFor="questionInput">Enter your question:</label>
           <div className="flex gap-2">
@@ -124,16 +148,23 @@ const [question, setQuestion] = useState('');
           <button onClick={handleAskQuestion} className="">
           <FiUpload size={30} />
           </button>
+          <button onClick={handleDelete}>
+          <RiDeleteBin6Line size={30} />
+          
+          
+        </button>
         </div>
+        
 
         </div>
         
         {answer && (
+          
           <div className="text-white flex justify-center p-6">
             <strong>Answer:</strong> {answer}
           </div>
         )}
-      </div>
+      </div> */}
     
     
    
