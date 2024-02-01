@@ -25,11 +25,11 @@ const Upload = () => {
         const formData = new FormData();
         formData.append('file', selectedFile);
       // Call your API endpoint to handle file upload
-    //   axios.post('https://0769-34-143-189-192.ngrok-free.app/uploadPdfs', formData)
-    //     .then(response => console.log(response))
-    //     .catch(error => console.error(error));
-    // } else {
-    //   alert("Please select a file before submitting.");
+      axios.post('https://39f8-34-105-14-223.ngrok-free.app/uploadPdfs', formData)
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
+    } else {
+      alert("Please select a file before submitting.");
     }
   };
 
@@ -42,19 +42,22 @@ const [question, setQuestion] = useState('');
 
       const handleAskQuestion = async () => {
         try {
-        //   const response = await axios.post('', { question });
-          console.log(question)
+          const response = await axios.post('https://39f8-34-105-14-223.ngrok-free.app/ask', { question });
+        //   response_data = response.data
+        //   console.log(response.data)
+        
           setQuestion("")
-        //   setAnswer(response.data.answer);
+          setAnswer(response.data.response);
+        //   console.log(answer)
         } catch (error) {
           console.error('Error asking question:', error);
-        //   setAnswer('Error fetching answer. Please try again.');
+          setAnswer('Error fetching answer. Please try again.');
         }
       };
   return (
     <div>
 
-    {!uploaded ? (<div className=" h-fit  ">
+    {/* {!uploaded ? (<div className=" h-fit  ">
       <div className="flex flex-col items-center justify-center pt-40 gap-10">
         <div className="text-2xl">Upload your document here</div>
         <form onSubmit={handleFormSubmit}>
@@ -80,9 +83,10 @@ const [question, setQuestion] = useState('');
         <div className="flex flex-col  items-center justify-center pt-40 ">
           <label htmlFor="questionInput">Enter your question:</label>
           <div className="flex gap-2">
-          <input
+          <textarea
           placeholder="For eg. what is the name of the book ?"
           className=" text-black w-96 px-2 border-2 rounded-lg"
+          rows={2}
             type="text"
             id="questionInput"
             value={question}
@@ -97,12 +101,39 @@ const [question, setQuestion] = useState('');
         </div>
         
         {answer && (
-          <div>
+          <div className="text-white flex justify-center p-6">
             <strong>Answer:</strong> {answer}
           </div>
         )}
       </div>
-    )}
+    )} */}
+     <div className="h-fit ">
+        <div className="flex flex-col  items-center justify-center pt-40 ">
+          <label htmlFor="questionInput">Enter your question:</label>
+          <div className="flex gap-2">
+          <textarea
+          placeholder="For eg. what is the name of the book ?"
+          className=" text-black w-96 px-2 border-2 rounded-lg"
+          rows={2}
+            type="text"
+            id="questionInput"
+            value={question}
+            onChange={handleQuestionChange}
+          />
+        
+          <button onClick={handleAskQuestion} className="">
+          <FiUpload size={30} />
+          </button>
+        </div>
+
+        </div>
+        
+        {answer && (
+          <div className="text-white flex justify-center p-6">
+            <strong>Answer:</strong> {answer}
+          </div>
+        )}
+      </div>
     
     
    
